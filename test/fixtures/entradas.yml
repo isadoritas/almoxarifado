@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  produto: one
+  quantidade: 1
+  user: one
+  data_entrada: 2023-11-30 09:47:00
+
+two:
+  produto: two
+  quantidade: 1
+  user: two
+  data_entrada: 2023-11-30 09:47:00
