@@ -1,14 +1,25 @@
-<p style="color: green"><%= notice %></p>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Quantidade</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @produtos.each_with_index do |produto, index| %>
+      <tr>
+        <th scope="row"><%= index + 1 %></th>
+        <td><%= produto.nome %></td>
+        <td><%= produto.quantidade %></td>
+        <td>
+          <%= link_to "Show", produto, class: 'btn btn-primary btn-sm' %>
+          <%= link_to "Edit", edit_produto_path(produto), class: 'btn btn-warning btn-sm' %>
+          <%= link_to "Destroy", produto, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-<h1>Produtos</h1>
-
-<div id="produtos">
-  <% @produtos.each do |produto| %>
-    <%= render produto %>
-    <p>
-      <%= link_to "Show this produto", produto %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New produto", new_produto_path %>

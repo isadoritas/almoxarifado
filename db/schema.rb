@@ -10,16 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_30_124803) do
-  create_table "entradas", force: :cascade do |t|
-    t.integer "produto_id", null: false
-    t.integer "quantidade"
+ActiveRecord::Schema[7.1].define(version: 2023_12_02_161715) do
+  create_table "logs", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.datetime "data_entrada"
+    t.string "tipo"
+    t.integer "quantidade_alterada"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["produto_id"], name: "index_entradas_on_produto_id"
-    t.index ["user_id"], name: "index_entradas_on_user_id"
+    t.integer "produto_id", null: false
+    t.index ["produto_id"], name: "index_logs_on_produto_id"
+    t.index ["user_id"], name: "index_logs_on_user_id"
   end
 
   create_table "produtos", force: :cascade do |t|
@@ -27,17 +27,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_30_124803) do
     t.integer "quantidade"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "saidas", force: :cascade do |t|
-    t.integer "produto_id", null: false
-    t.integer "quantidade"
-    t.integer "user_id", null: false
-    t.datetime "data_saida"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["produto_id"], name: "index_saidas_on_produto_id"
-    t.index ["user_id"], name: "index_saidas_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -52,8 +41,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_30_124803) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "entradas", "produtos"
-  add_foreign_key "entradas", "users"
-  add_foreign_key "saidas", "produtos"
-  add_foreign_key "saidas", "users"
+  add_foreign_key "logs", "produtos"
+  add_foreign_key "logs", "users"
 end

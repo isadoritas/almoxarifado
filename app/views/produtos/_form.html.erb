@@ -1,4 +1,4 @@
-<%= form_with(model: produto) do |form| %>
+<%= form_with(model: produto, local: true) do |form| %>
   <% if produto.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(produto.errors.count, "error") %> prohibited this produto from being saved:</h2>
@@ -11,7 +11,20 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.submit %>
+  <div class="form-group">
+    <%= form.label :nome %>
+    <%= form.text_field :nome, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :quantidade %>
+    <%= form.number_field :quantidade, class: 'form-control' %>
+  </div>
+
+  <!-- Add hidden field for user email -->
+  <%= form.hidden_field :user_email, value: current_user.email %>
+
+  <div class="form-group">
+    <%= form.submit "Update produto", class: 'btn btn-primary' %>
   </div>
 <% end %>

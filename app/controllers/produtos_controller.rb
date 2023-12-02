@@ -1,5 +1,5 @@
 class ProdutosController < ApplicationController
-  before_action :set_produto, only: %i[ show edit update destroy ]
+  before_action :set_produto, only: %i[show edit update destroy]
 
   # GET /produtos or /produtos.json
   def index
@@ -8,6 +8,8 @@ class ProdutosController < ApplicationController
 
   # GET /produtos/1 or /produtos/1.json
   def show
+    @produto = Produto.find(params[:id])
+    @current_user = current_user
   end
 
   # GET /produtos/new
@@ -36,15 +38,28 @@ class ProdutosController < ApplicationController
 
   # PATCH/PUT /produtos/1 or /produtos/1.json
   def update
+    @produto = Produto.find(params[:id])
+    quantidade_anterior = @produto.quantidade
+
     respond_to do |format|
-      if @produto.update(produto_params)
-        format.html { redirect_to produto_url(@produto), notice: "Produto was successfully updated." }
-        format.json { render :show, status: :ok, location: @produto }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @produto.errors, status: :unprocessable_entity }
+        if @produto.update(produto_params)
+          quantidade_atual = @produto.quantidade
+          quantidade_alterada = quantidade_atual - quantidade_anterior
+          @current_user = current_user
+
+          tipo = quantidade_alterada.positive? ? 'entrada' : 'retirada'
+          puts "DEBUG: Before add_log method"
+          @produto.add_log(current_user, tipo, quantidade_alterada)
+
+          puts "DEBUG: After add_log method"
+
+          format.html { redirect_to produto_url(@produto), notice: "Produto was successfully updated." }
+          format.json { render :show, status: :ok, location: @produto }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @produto.errors, status: :unprocessable_entity }
+        end
       end
-    end
   end
 
   # DELETE /produtos/1 or /produtos/1.json
@@ -65,6 +80,7 @@ class ProdutosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def produto_params
-      params.fetch(:produto, {})
+      params.require(:produto).permit(:quantidade, :nome)
     end
+
 end

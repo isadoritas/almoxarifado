@@ -1,10 +1,10 @@
-class CreateSaidas < ActiveRecord::Migration[7.1]
+class CreateLogs < ActiveRecord::Migration[7.1]
   def change
-    create_table :saidas do |t|
+    create_table :logs do |t|
       t.references :produto, null: false, foreign_key: true
-      t.integer :quantidade
       t.references :user, null: false, foreign_key: true
-      t.datetime :data_saida
+      t.string :tipo
+      t.integer :quantidade_alterada
 
       t.timestamps
     end

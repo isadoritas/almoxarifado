@@ -1,10 +1,10 @@
-<p style="color: green"><%= notice %></p>
+<h2>Logs:</h2>
+<ul>
+  <% @produto.show_logs.each do |log| %>
+    <li>
+      <%= log.user.email %>: Realizou <%= log.tipo %> de <%= log.quantidade_alterada %> unidades de <%= @produto.nome %> em <%= log.created_at.strftime('%m/%d/%Y') %> ás <%= log.created_at.strftime('%H:%M')%>
+    </li>
+  <% end %>
 
-<%= render @produto %>
-
-<div>
-  <%= link_to "Edit this produto", edit_produto_path(@produto) %> |
-  <%= link_to "Back to produtos", produtos_path %>
-
-  <%= button_to "Destroy this produto", @produto, method: :delete %>
-</div>
+  <%= link_to 'Voltar', produtos_path, class:'btn btn-primary' %>
+</ul>
