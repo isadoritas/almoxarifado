@@ -1,0 +1,11 @@
+<!-- views/log_history/index.html.erb -->
+<h2>Log History:</h2>
+<ul>
+  <% @logs.each do |log| %>
+    <li>
+      <%= log.user.email %>: Realizou <%= log.tipo %> de <%= log.quantidade_alterada %> unidades de <%= log.produto.nome %> em <%= log.created_at.strftime('%m/%d/%Y') %> às <%= log.created_at.strftime('%H:%M') %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to 'Voltar', produtos_path, class: 'btn btn-primary' %>
