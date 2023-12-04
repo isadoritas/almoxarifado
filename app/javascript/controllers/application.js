@@ -1,4 +1,7 @@
 import { Application } from "@hotwired/stimulus"
+import 'bootstrap/dist/css/bootstrap'
+import 'bootstrap/dist/js/bootstrap'
+import "stylesheets/application"
 
 const application = Application.start()
 
@@ -7,3 +10,4 @@ application.debug = false
 window.Stimulus   = application
 
 export { application }
+

@@ -68,3 +68,8 @@ end
   gem 'devise'
 
   gem "faker"
+
+  gem "ransack"
+
+  gem "pagy"
+

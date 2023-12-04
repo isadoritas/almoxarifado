@@ -1,9 +1,14 @@
 class ProdutosController < ApplicationController
+  include Pagy::Backend
+
   before_action :set_produto, only: %i[show edit update destroy]
 
   # GET /produtos or /produtos.json
   def index
-    @produtos = Produto.all
+    # @produtos = Produto.all
+    @q = Produto.ransack(params[:q])
+    @produtos = @q.result(distinct: true)
+    @pagy, @produtos = pagy(@q.result, items: 10 )
   end
 
   # GET /produtos/1 or /produtos/1.json
