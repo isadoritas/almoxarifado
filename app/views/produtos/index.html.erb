@@ -1,7 +1,8 @@
 <%= search_form_for @q do |f| %>
   <%= f.label :nome %>
   <%= f.search_field :nome_cont %>
-  <%= f.submit %>  
+  <%= f.submit %>
+  <%= link_to "Novo produto", new_produto_path, class: 'btn btn-primary' %>  
   <% end %>
 <table class="table">
   <thead>

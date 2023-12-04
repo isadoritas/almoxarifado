@@ -2,7 +2,11 @@
 <ul>
   <% @produto.show_logs.each do |log| %>
     <li>
-      <%= log.user.email %>: Realizou <%= log.tipo %> de <%= log.quantidade_alterada %> unidades de <%= @produto.nome %> em <%= log.created_at.strftime('%m/%d/%Y') %> ás <%= log.created_at.strftime('%H:%M')%>
+      <% if log.tipo == 'alteracao_nome' %>
+        <%= log.user.email %>: Realizou alteração do nome do produto de <%= log.nome_anterior %> para <%= log.produto.nome %>
+      <% elsif log.quantidade_alterada.present? %>
+        <%= log.user.email %>: Realizou <%= log.tipo %> de <%= log.quantidade_alterada %> unidades de <%= @produto.nome %> em <%= log.created_at.strftime('%d/%m/%Y') %> ás <%= log.created_at.strftime('%H:%M')%>
+      <% end %>
     </li>
   <% end %>
 

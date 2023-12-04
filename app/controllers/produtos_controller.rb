@@ -3,6 +3,7 @@ class ProdutosController < ApplicationController
 
   before_action :set_produto, only: %i[show edit update destroy]
 
+
   # GET /produtos or /produtos.json
   def index
     # @produtos = Produto.all
@@ -43,22 +44,25 @@ class ProdutosController < ApplicationController
 
   # PATCH/PUT /produtos/1 or /produtos/1.json
   def update
-    @produto = Produto.find(params[:id])
+  
+    nome_anterior = @produto.nome
     quantidade_anterior = @produto.quantidade
 
     respond_to do |format|
-        if @produto.update(produto_params)
+      if within_horario_permitido? && @produto.update(produto_params)
           quantidade_atual = @produto.quantidade
           quantidade_alterada = quantidade_atual - quantidade_anterior
           @current_user = current_user
+          novo_nome = produto_params[:nome]
 
           tipo = quantidade_alterada.positive? ? 'entrada' : 'retirada'
-          puts "DEBUG: Before add_log method"
-          @produto.add_log(current_user, tipo, quantidade_alterada)
+          @produto.add_log(current_user, tipo, quantidade_alterada) if quantidade_alterada != 0
 
-          puts "DEBUG: After add_log method"
+          if nome_anterior.strip.downcase != novo_nome.strip.downcase && novo_nome.present?
+            @produto.add_log(current_user, 'alteracao_nome', 0, nome_anterior, novo)
+          end
 
-          format.html { redirect_to produto_url(@produto), notice: "Produto was successfully updated." }
+          format.html { redirect_to produto_url(@produto), notice: "Produto foi atualizado com sucesso." }
           format.json { render :show, status: :ok, location: @produto }
         else
           format.html { render :edit, status: :unprocessable_entity }
@@ -69,23 +73,33 @@ class ProdutosController < ApplicationController
 
   # DELETE /produtos/1 or /produtos/1.json
   def destroy
+    begin
     @produto.destroy!
+    flash[:notice] = "Produto foi excluído com sucesso."
+    rescue ActiveRecord::RecordNotDestroyed => e
+    flash[:alert] = e.record.errors.full_messages.join(', ')
+    end
 
     respond_to do |format|
-      format.html { redirect_to produtos_url, notice: "Produto was successfully destroyed." }
+      format.html { redirect_to produtos_url }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_produto
-      @produto = Produto.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def produto_params
-      params.require(:produto).permit(:quantidade, :nome)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_produto
+    @produto = Produto.find(params[:id])
+  end
 
+  # Only allow a list of trusted parameters through.
+  def produto_params
+    params.require(:produto).permit(:quantidade, :nome)
+  end
+
+  def within_horario_permitido?
+    current_time = Time.now
+    current_time.wday.between?(1,5) && current_time.hour.between?(9, 18)
+  end
 end
