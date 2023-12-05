@@ -10,16 +10,18 @@
     <%= javascript_include_tag 'rails-ujs' %>
 
 
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <header>
+  <header>
+    <% unless controller_name == 'registrations' && action_name == 'new' || controller_name == 'sessions' && action_name == 'new' %>
       <%= render 'layouts/navbar' %>
-      <%= render 'layouts/alerts' %>
-      <header>
-    <%= yield %>
-  </body>
+    <% end %>
+    <%= render 'layouts/alerts' %>
+  </header>
+  <%= yield %>
+</body>
+
 </html>

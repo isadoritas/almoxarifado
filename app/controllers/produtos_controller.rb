@@ -1,6 +1,7 @@
 class ProdutosController < ApplicationController
   include Pagy::Backend
-
+  
+  before_action :authenticate_user!
   before_action :set_produto, only: %i[show edit update destroy]
 
 

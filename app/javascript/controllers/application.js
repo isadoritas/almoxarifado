@@ -1,5 +1,5 @@
 import { Application } from "@hotwired/stimulus"
-
+import 'bootstrap/dist/css/bootstrap'
 import 'bootstrap/dist/js/bootstrap'
 import "stylesheets/application"
 
