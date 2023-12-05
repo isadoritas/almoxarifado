@@ -60,7 +60,7 @@ class ProdutosController < ApplicationController
           @produto.add_log(current_user, tipo, quantidade_alterada) if quantidade_alterada != 0
 
           if nome_anterior.strip.downcase != novo_nome.strip.downcase && novo_nome.present?
-            @produto.add_log(current_user, 'alteracao_nome', 0, nome_anterior, novo)
+            @produto.add_log(current_user, 'alteracao_nome', 0, nome_anterior, novo_nome)
           end
 
           format.html { redirect_to produto_url(@produto), notice: "Produto foi atualizado com sucesso." }

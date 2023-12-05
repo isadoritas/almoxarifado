@@ -100,3 +100,7 @@ form .text h3 a{
 form .text h3 a:hover{
   text-decoration: underline;
 }
+
+h3 {
+  font-size: medium;
+}

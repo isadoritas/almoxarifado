@@ -11,7 +11,7 @@ class Produto < ApplicationRecord
     end
 
     def show_logs
-      logs.order(created_at: :desc).select(:user_id, :tipo, :quantidade_alterada, :created_at, :nome_anterior, :produto_id)
+      logs.order(created_at: :desc).select(:user_id, :tipo, :quantidade_alterada, :created_at, :nome_anterior, :produto_id, :novo_nome)
     end
 
     def self.ransackable_attributes(auth_object = nil)

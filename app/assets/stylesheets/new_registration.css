@@ -42,7 +42,7 @@ body{
 }
 .wrapper form .input-box{
   height: 52px;
-  margin: 18px 0;
+  margin: 50px 0;
 }
 form .input-box input{
   height: 100%;
@@ -94,4 +94,8 @@ form .text h3 a{
 }
 form .text h3 a:hover{
   text-decoration: underline;
+}
+
+h3 {
+  font-size: medium;
 }
