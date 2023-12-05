@@ -3,6 +3,5 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  has_many :entradas, class_name: 'Entrada'
-  has_many :saidas, class_name: 'Saida'
+  has_many :logs
 end

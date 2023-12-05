@@ -44,36 +44,7 @@ class ProdutosController < ApplicationController
     end
   end
 
-  # PATCH/PUT /produtos/1 or /produtos/1.json
-  def update
-  
-    nome_anterior = @produto.nome
-    quantidade_anterior = @produto.quantidade
-
-    respond_to do |format|
-      if  @produto.update(produto_params)
-          quantidade_atual = @produto.quantidade
-          quantidade_alterada = quantidade_atual - quantidade_anterior
-          @current_user = current_user
-          novo_nome = produto_params[:nome]
-
-          tipo = quantidade_alterada.positive? ? 'entrada' : 'retirada'
-          @produto.add_log(current_user, tipo, quantidade_alterada) if quantidade_alterada != 0
-
-          if nome_anterior.strip.downcase != novo_nome.strip.downcase && novo_nome.present?
-            @produto.add_log(current_user, 'alteracao_nome', 0, nome_anterior, novo_nome)
-          end
-
-          format.html { redirect_to produto_url(@produto), notice: "Produto foi atualizado com sucesso." }
-          format.json { render :show, status: :ok, location: @produto }
-        else
-          format.html { render :edit, status: :unprocessable_entity }
-          format.json { render json: @produto.errors, status: :unprocessable_entity }
-        end
-      end
-  end
-
-  # DELETE /produtos/1 or /produtos/1.json
+   # DELETE /produtos/1 or /produtos/1.json
   def destroy
     begin
     @produto.destroy!
@@ -88,7 +59,54 @@ class ProdutosController < ApplicationController
     end
   end
 
+  # PATCH/PUT /produtos/1 or /produtos/1.json
+  def update
+    nome_anterior = @produto.nome
+    quantidade_anterior = @produto.quantidade
+  
+    respond_to do |format|
+      if update_produto
+        format.html { redirect_to produto_url(@produto), notice: "Produto foi atualizado com sucesso." }
+        format.json { render :show, status: :ok, location: @produto }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @produto.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
   private
+  
+  def update_produto
+    if @produto.update(produto_params)
+      update_quantidade_log
+      update_nome_log
+      true
+    else
+      false
+    end
+  end
+  
+  def update_quantidade_log
+    quantidade_atual = @produto.quantidade
+    quantidade_alterada = quantidade_atual - quantidade_anterior
+    @current_user = current_user
+  
+    if quantidade_alterada != 0
+      tipo = quantidade_alterada.positive? ? 'entrada' : 'retirada'
+      @produto.add_log(current_user, tipo, quantidade_alterada)
+    end
+  end
+  
+  def update_nome_log
+    novo_nome = produto_params[:nome]
+  
+    if nome_anterior.strip.downcase != novo_nome.strip.downcase && novo_nome.present?
+      @produto.add_log(current_user, 'alteracao_nome', 0, nome_anterior, novo_nome)
+    end
+  end
+  
+  
 
   # Use callbacks to share common setup or constraints between actions.
   def set_produto
