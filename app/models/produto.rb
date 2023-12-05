@@ -3,7 +3,7 @@ class Produto < ApplicationRecord
     before_update :within_horario_permitido?
 
     has_many :logs, dependent: :destroy
-    validates :nome, presence: true, uniqueness: true
+    validates :nome, presence: true, uniqueness: { message: "Já está em uso. Escolha outro nome." }
     validates :quantidade, presence: true 
 
     def add_log(user, tipo, quantidade_alterada, nome_anterior = nil, novo_nome = nil)
