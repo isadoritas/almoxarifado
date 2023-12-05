@@ -4,6 +4,7 @@ class ProdutosController < ApplicationController
   before_action :set_produto, only: %i[show edit update destroy]
 
 
+
   # GET /produtos or /produtos.json
   def index
     # @produtos = Produto.all
@@ -49,7 +50,7 @@ class ProdutosController < ApplicationController
     quantidade_anterior = @produto.quantidade
 
     respond_to do |format|
-      if within_horario_permitido? && @produto.update(produto_params)
+      if  @produto.update(produto_params)
           quantidade_atual = @produto.quantidade
           quantidade_alterada = quantidade_atual - quantidade_anterior
           @current_user = current_user
@@ -96,10 +97,5 @@ class ProdutosController < ApplicationController
   # Only allow a list of trusted parameters through.
   def produto_params
     params.require(:produto).permit(:quantidade, :nome)
-  end
-
-  def within_horario_permitido?
-    current_time = Time.now
-    current_time.wday.between?(1,5) && current_time.hour.between?(9, 18)
   end
 end

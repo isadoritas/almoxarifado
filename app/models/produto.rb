@@ -1,7 +1,8 @@
 class Produto < ApplicationRecord
     before_destroy :verify_log, prepend: true
-    has_many :logs, dependent: :destroy
+    before_update :within_horario_permitido?
 
+    has_many :logs, dependent: :destroy
     validates :nome, presence: true, uniqueness: true
     validates :quantidade, presence: true 
 
@@ -21,6 +22,16 @@ class Produto < ApplicationRecord
     def verify_log
       if self.logs.loaded? || self.logs.any?
         errors.add(:base, "Não é possível excluir o produto")
+        throw :abort
+      end
+    end
+
+    def within_horario_permitido?
+      current_time = Time.now
+      if current_time.wday.between?(1, 5) && current_time.hour.between?(9, 18)
+        true
+      else
+        errors.add(:base, "Atualizações apenas de segunda á sexta - 9h ás 18")
         throw :abort
       end
     end
