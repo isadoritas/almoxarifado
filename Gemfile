@@ -74,3 +74,5 @@ end
   gem "pagy"
 
   gem 'timecop'
+
+  gem 'rails-i18n', '~> 7.0.0'

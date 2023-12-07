@@ -10,7 +10,7 @@ module Almoxarifado
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.1
-
+    config.i18n.default_locale = :'pt-BR'
     config.time_zone = 'Brasilia'
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do

@@ -1,0 +1,7 @@
+pt-BR:
+  global:
+    forms:
+      messages:
+        errors:
+          one: "1 erro impediu que %{model} fosse salvo"
+          other: "%{count} erros impediram que %{model} fosse salvo"

@@ -1,6 +1,6 @@
 <% if @produto.errors.any? %>
   <div id="error_explanation">
-    <h2><%= pluralize(@produto.errors.count, "error") %> prohibited this produto from being saved:</h2>
+    <h2><%= t 'global.forms.messages.errors', count: @produto.errors.count, model: @produto.class.model_name.human %></h2>
     <ul>
       <% @produto.errors.full_messages.each do |message| %>
         <li><%= message %></li>

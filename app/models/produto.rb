@@ -7,26 +7,37 @@ class Produto < ApplicationRecord
   validates :quantidade, presence: true, numericality: { greater_than_or_equal_to: 0 }
 
   def update_with_log(user, params)
-    nome_anterior = self.nome
-    quantidade_anterior = self.quantidade
+    return "A atualização deve ser diferente da anterior" if unchanged?(params)
 
-    if self.update(params)
-      quantidade_atual = self.quantidade
-      quantidade_alterada = quantidade_atual - quantidade_anterior
-      novo_nome = params[:nome]
-
-      tipo = quantidade_alterada.positive? ? 'entrada' : 'retirada'
-      self.add_log(user, tipo, quantidade_alterada) if quantidade_alterada != 0
-
-      if nome_anterior.strip.downcase != novo_nome.strip.downcase && novo_nome.present?
-        self.add_log(user, 'alteracao_nome', 0, nome_anterior, novo_nome)
-      end
-
-      return true
-    else
-      return false
-    end
+    quantidade_anterior, nome_anterior = self.quantidade, self.nome
+  
+    return false unless self.update(params)
+  
+    log_quantidade(user, quantidade_anterior)
+    log_nome(user, nome_anterior, params[:nome])
+  
+    true
   end
+
+  def unchanged?(params)
+    self.nome == params[:nome] && self.quantidade == params[:quantidade]
+  end
+  
+  def log_quantidade(user, quantidade_anterior)
+    quantidade_alterada = self.quantidade - quantidade_anterior
+    return if quantidade_alterada == 0
+  
+    tipo = quantidade_alterada.positive? ? 'entrada' : 'retirada'
+    self.add_log(user, tipo, quantidade_alterada)
+  end
+  
+  def log_nome(user, nome_anterior, novo_nome)
+    return if novo_nome.blank? || nome_anterior.strip.downcase == novo_nome.strip.downcase
+  
+    self.add_log(user, 'alteracao_nome', 0, nome_anterior, novo_nome)
+  end
+  
+
 
   def add_log(user, tipo, quantidade_alterada, nome_anterior = nil, novo_nome = nil)
     logs.create(user: user, tipo: tipo, quantidade_alterada: quantidade_alterada, nome_anterior: nome_anterior, novo_nome: novo_nome)
