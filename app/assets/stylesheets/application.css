@@ -1,5 +1,6 @@
-@import "new_session.css"
-@import "new_registration.css"
+@import "new_session.css";
+@import "new_registration.css";
+@import "style.css";
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -14,4 +15,5 @@
  *
  *= require_tree .
  *= require_self
+ *= require style
  */

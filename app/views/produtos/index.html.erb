@@ -1,36 +1,17 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Table 01</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-6 p-4">
-      <h1 class="text-center mb-4">Estoque</h1>
-      <%= render 'searchform' %>
-    </div>
-  </div>
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
 
-  <div class="table-responsive" style="border: 3px solid blue; padding: 10px;"> <!-- Adicionando borda e preenchimento à tabela -->
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Nome</th>
-          <th scope="col">Quantidade</th>
-          <th scope="col">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @produtos.each do |produto| %>
-          <tr>
-            <td><%= produto.nome %></td>
-            <td><%= produto.quantidade %></td>
-            <td>
-              <%= link_to 'Mostrar', produto, class: 'btn btn-primary btn-sm' %>
-              <%= link_to 'Editar', edit_produto_path(produto), class: 'btn btn-warning btn-sm' %>
-              <%= link_to 'Excluír', produto, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<%= stylesheet_link_tag 'style.css' %>
 
-  <%== pagy_bootstrap_nav(@pagy) %>
+	</head>
+	<%= render 'table' %>
+</html>
 

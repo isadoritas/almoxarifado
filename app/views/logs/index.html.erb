@@ -4,7 +4,7 @@
     <% @logs.each do |log| %>
       <div class="list-group-item">
         <% if log.tipo == 'alteracao_nome' %>
-          <strong><%= log.user.email %>:</strong> Realizou alteração do nome do produto de <%= log.nome_was %> para <%= log.produto.nome %>
+          <strong><%= log.user.email %>:</strong> Realizou alteração do nome do produto de <%= log.nome_anterior %> para <%= log.produto.nome %>
         <% elsif log.quantidade_alterada.present? %>
           <strong><%= log.user.email %>:</strong> Realizou <%= log.tipo %> de <%= log.quantidade_alterada %> unidades de <%= log.produto.nome %> em <%= log.created_at.strftime('%m/%d/%Y') %> ás <%= log.created_at.strftime('%H:%M')%>
         <% end %>

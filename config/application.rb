@@ -12,6 +12,10 @@ module Almoxarifado
     config.load_defaults 7.1
     config.i18n.default_locale = :'pt-BR'
     config.time_zone = 'Brasilia'
+    config.serve_static_files = true
+    config.assets.compile = true
+    config.assets.digest = true
+
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
