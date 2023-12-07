@@ -4,7 +4,7 @@ class Produto < ApplicationRecord
   validate :within_horario_permitido?
   has_many :logs, dependent: :destroy
   validates :nome, presence: true, uniqueness: { message: "Já está em uso. Escolha outro nome." }
-  validates :quantidade, presence: true 
+  validates :quantidade, presence: true, numericality: { greater_than_or_equal_to: 0 }
 
   def update_with_log(user, params)
     nome_anterior = self.nome
