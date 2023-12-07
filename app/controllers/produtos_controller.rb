@@ -46,23 +46,9 @@ class ProdutosController < ApplicationController
 
   # PATCH/PUT /produtos/1 or /produtos/1.json
   def update
-  
-    nome_anterior = @produto.nome
-    quantidade_anterior = @produto.quantidade
-
+    
     respond_to do |format|
-      if  @produto.update(produto_params)
-          quantidade_atual = @produto.quantidade
-          quantidade_alterada = quantidade_atual - quantidade_anterior
-          @current_user = current_user
-          novo_nome = produto_params[:nome]
-
-          tipo = quantidade_alterada.positive? ? 'entrada' : 'retirada'
-          @produto.add_log(current_user, tipo, quantidade_alterada) if quantidade_alterada != 0
-
-          if nome_anterior.strip.downcase != novo_nome.strip.downcase && novo_nome.present?
-            @produto.add_log(current_user, 'alteracao_nome', 0, nome_anterior, novo_nome)
-          end
+      if  @produto.update_with_log(current_user, produto_params)
 
           format.html { redirect_to produto_url(@produto), notice: "Produto foi atualizado com sucesso." }
           format.json { render :show, status: :ok, location: @produto }
@@ -97,6 +83,6 @@ class ProdutosController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def produto_params
-    params.require(:produto).permit(:quantidade, :nome)
+    params.require(:produto).permit(:quantidade, :nome, :email)
   end
 end
