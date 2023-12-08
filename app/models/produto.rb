@@ -7,8 +7,10 @@ class Produto < ApplicationRecord
   validates :quantidade, presence: true, numericality: { greater_than_or_equal_to: 0 }
 
   def update_with_log(user, params)
-    return "A atualização deve ser diferente da anterior" if unchanged?(params)
-
+    if unchanged?(params)
+      errors.add(:base, "É necessário que a atualização seja diferente da anterior")
+      return :unchanged
+    else
     quantidade_anterior, nome_anterior = self.quantidade, self.nome
   
     return false unless self.update(params)
@@ -18,6 +20,7 @@ class Produto < ApplicationRecord
   
     true
   end
+end
 
   def unchanged?(params)
     self.nome == params[:nome] && self.quantidade == params[:quantidade]

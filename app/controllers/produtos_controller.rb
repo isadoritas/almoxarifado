@@ -48,11 +48,15 @@ class ProdutosController < ApplicationController
   def update
     
     respond_to do |format|
-      if  @produto.update_with_log(current_user, produto_params)
+      result = @produto.update_with_log(current_user, produto_params)
 
+      if result = :unchanged
+        format.html { redirect_to produto_url(@produto), notice: "Nenhuma alteração foi feita." }
+        format.json { render :show, status: :ok, location: @produto }
+      elsif result
           format.html { redirect_to produto_url(@produto), notice: "Produto foi atualizado com sucesso." }
           format.json { render :show, status: :ok, location: @produto }
-        else
+      else
           format.html { render :edit, status: :unprocessable_entity }
           format.json { render json: @produto.errors, status: :unprocessable_entity }
         end
