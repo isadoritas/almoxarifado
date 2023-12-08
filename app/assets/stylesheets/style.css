@@ -132,22 +132,11 @@ sub {
 sup {
   top: -.5em; }
 
-a {
-  color: #007bff;
-  text-decoration: none;
-  background-color: transparent; }
-  a:hover {
-    color: #0056b3;
-    text-decoration: underline; }
+  a.sort_link.desc {
+    color: white;
+  }
 
-a:not([href]):not([tabindex]) {
-  color: inherit;
-  text-decoration: none; }
-  a:not([href]):not([tabindex]):hover, a:not([href]):not([tabindex]):focus {
-    color: inherit;
-    text-decoration: none; }
-  a:not([href]):not([tabindex]):focus {
-    outline: 0; }
+
 
 pre,
 code,
@@ -6618,7 +6607,7 @@ button.bg-dark:focus {
 .my-3 {
   margin-bottom: 1rem !important; }
 
-.ml-3,
+.ml-3,a
 .mx-3 {
   margin-left: 1rem !important; }
 
@@ -8143,16 +8132,17 @@ body {
   background: #f8f9fd;
   color: gray; }
 
-a {
-  -webkit-transition: .3s all ease;
-  -o-transition: .3s all ease;
-  transition: .3s all ease;
-  color: #1089ff; }
-  a:hover, a:focus {
+a.sort_link {
+  color: white
+}
+
+a:hover, a:focus {
     text-decoration: none !important;
     outline: none !important;
     -webkit-box-shadow: none;
     box-shadow: none; }
+
+    
 
 h1, h2, h3, h4, h5,
 .h1, .h2, .h3, .h4, .h5 {

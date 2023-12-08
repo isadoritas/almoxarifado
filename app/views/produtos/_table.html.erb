@@ -11,7 +11,7 @@
 						<table class="table">
 						  <thead class="thead-primary">
 						    <tr>
-						      <th>Nome</th>
+						      <th><%= sort_link(@q, :nome, "Nome", default_order: :desc) %></th>
 						      <th>Quantidade</th>
 						      <th>Actions</th>
 							  <th>Transferir</th>
