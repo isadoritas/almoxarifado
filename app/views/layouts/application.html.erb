@@ -14,12 +14,15 @@
 <body>
     <header>
          <div class="fixed-top">
-            <%= render 'layouts/alerts' %>
             <% unless controller_name == 'registrations' && action_name == 'new' || controller_name == 'sessions' && action_name == 'new' %>
             <%= render 'layouts/navbar' %>
             <% end %>
          </div>
     </header>
     <%= yield %>
+    
+    <div class="fixed-bottom">
+        <%= render 'layouts/alerts' %>
+    </div>
 </body>
 </html>
