@@ -2,6 +2,10 @@
 @import "new_registration.css";
 @import "style.css";
 
+.alert-dismissible {
+    padding-left: $close-font-size + $alert-padding-x * 2;
+  }
+  
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
