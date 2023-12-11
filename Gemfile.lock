@@ -111,6 +111,7 @@ GEM
     erubi (1.12.0)
     faker (3.2.2)
       i18n (>= 1.8.11, < 2)
+    ffi (1.16.3)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.1)
@@ -216,6 +217,8 @@ GEM
     rexml (3.2.6)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
+    sassc (2.4.0)
+      ffi (~> 1.9)
     selenium-webdriver (4.16.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
@@ -239,7 +242,6 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
-    unicode (0.4.4.4)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.1)
@@ -272,6 +274,7 @@ DEPENDENCIES
   rails (~> 7.1.2)
   rails-i18n (~> 7.0.0)
   ransack
+  sassc
   selenium-webdriver
   sprockets-rails
   sqlite3 (~> 1.4)
@@ -279,7 +282,6 @@ DEPENDENCIES
   timecop
   turbo-rails (~> 1.0.0)
   tzinfo-data
-  unicode
   web-console
 
 RUBY VERSION

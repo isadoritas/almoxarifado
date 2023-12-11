@@ -22,11 +22,14 @@
 							<tr>
 								<td><%= highlight produto.nome, params.dig(:q, :nome_cont) %></td>
 								<td><%= produto.quantidade %></td>
-								<td class="container" style="display: flex;">
-									<%= link_to 'Mostrar', produto, class: 'btn btn-primary btn-sm' %>
-									<%= link_to 'Editar', edit_produto_path(produto), class: 'btn btn-warning btn-sm' %>
+								<td>
+									<div class="d-flex">
+									<%= link_to 'Mostrar', produto, class: 'btn btn-primary btn-sm', style: 'margin-right: 8px;' %>
+									<%= link_to 'Editar', edit_produto_path(produto), class: 'btn btn-warning btn-sm', style: 'margin-right: 8px;' %>
 									<%= link_to 'Excluír', produto, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+									</div>
 								</td>
+								<td>
 								<td>
 									<%= form_with(model: produto, local: true, html: { class: 'container' }) do |form| %>
 									<%= form.number_field :quantidade, class: 'form-control', min: 0 %>
