@@ -6,6 +6,8 @@ class Produto < ApplicationRecord
   validates :nome, presence: true, uniqueness: { message: "Já está em uso. Escolha outro nome." }
   validates :quantidade, presence: true, numericality: { greater_than_or_equal_to: 0 }
 
+  
+  
   def update_with_log(user, params)
     quantidade_anterior, nome_anterior = self.quantidade, self.nome
       #1- tenta atualizar o objeto

@@ -1,6 +1,6 @@
 <%= search_form_for @q, html: { class: 'form-inline' } do |f| %>
         <div class="form-group mb-2">
-          <%= f.label :nome, "Pesquisar", class: 'sr-only' %>
+          <%= f.label :nome_cont, "Pesquisar", class: 'sr-only' %>
           <%= f.search_field :nome_cont, class: 'form-control mr-2', placeholder: 'Pesquisar pelo nome' %>
         </div>
         <%= f.submit 'Search', class: 'btn btn-primary mb-2' %>

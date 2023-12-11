@@ -20,7 +20,7 @@
 						  <tbody>
 							<% @produtos.each do |produto| %>
 						    <tr>
-								<td><%= produto.nome %></td>
+								<td><%= highlight produto.nome, params.dig(:q, :nome_cont) %></td>
 								<td><%= produto.quantidade %></td>
 								<td>
 								<%= link_to 'Mostrar', produto, class: 'btn btn-primary btn-sm' %>
