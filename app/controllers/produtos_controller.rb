@@ -10,7 +10,6 @@ class ProdutosController < ApplicationController
   # GET /produtos or /produtos.json
   def index
     # @produtos = Produto.all
-    normalized_params = normalize_search_params(params[:q])
     @q = Produto.ransack(params[:q])
     @produtos = @q.result(distinct: true)
     @pagy, @produtos = pagy(@q.result, items: 10 )
@@ -92,21 +91,4 @@ class ProdutosController < ApplicationController
     params.require(:produto).permit(:quantidade, :nome, :email)
     
   end
-
-  def normalize_search_params(search_params)
-    return {} if search_params.blank?
-
-    # Normaliza cada valor dos parâmetros de pesquisa
-    normalized_params = search_params.each_with_object({}) do |(key, value), hash|
-      hash[key] = normalize_string(value) if value.present?
-    end
-
-    normalized_params
-  end
-
-  def normalize_string(value)
-    # Utiliza o método parameterize para remover acentos e caracteres especiais
-    value.parameterize(separator: ' ')
-  end
-  
 end
