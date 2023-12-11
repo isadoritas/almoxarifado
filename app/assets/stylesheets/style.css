@@ -133,7 +133,7 @@ sup {
   top: -.5em; }
 
   a.sort_link.desc {
-    color: white;
+    color: #007bff;
   }
 
 
@@ -8133,7 +8133,7 @@ body {
   color: gray; }
 
 a.sort_link {
-  color: white
+  color: #007bff
 }
 
 a:hover, a:focus {
@@ -8185,7 +8185,7 @@ h1, h2, h3, h4, h5,
     border: none;
     padding: 20px 30px;
     font-size: 14px;
-    color: #fff; }
+    color: #007bff !important; }
   .table tbody tr {
     margin-bottom: 10px; }
   .table tbody th, .table tbody td {
