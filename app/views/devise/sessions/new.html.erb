@@ -11,12 +11,12 @@
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="input-box">
         <%= f.label :email %>
-        <%= f.email_field :email, placeholder: "Enter your email", required: true%>
+        <%= f.email_field :email, placeholder: "Digite o seu email", required: true%>
       </div>
 
       <div class="input-box">
         <%= f.label :password, "Senha" %> 
-        <%= f.password_field :password, placeholder: "Enter your password", required: true %>
+        <%= f.password_field :password, placeholder: "Digite a sua senha", required: true %>
       </div>
 
       <div class="policy">
