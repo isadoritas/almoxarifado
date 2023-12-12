@@ -8,14 +8,15 @@
         <% current_date = created_at.strftime('%d/%m/%Y') %>
         <div class="list-group-item">
           <h3><%= current_date %></h3>
+          <div class="list-group-item-divider"></div>
           <ul>
       <% end %>
       <% logs.each do |log| %>
         <li><strong><%= log.created_at.strftime('%H:%M') %> :</strong> <%= log.user.email %> </li>
         <% if log.tipo == 'alteracao_nome' %>
-          Realizou alteração do nome do produto de <%= log.nome_anterior %> para <%= log.produto.nome %></strong>
+          Realizou alteração do nome do produto de <%= log.nome_anterior %> para <%= link_to log.produto.nome, edit_produto_path(log.produto) %></strong>
         <% elsif log.quantidade_alterada.present? %>
-          Realizou <%= log.tipo %> de <%= log.quantidade_alterada %> unidades de <%= log.produto.nome %>
+          Realizou <%= log.tipo %> de <%= log.quantidade_alterada %> unidades de <%= link_to log.produto.nome, edit_produto_path(log.produto) %>
         <% end %>
       <% end %>
       <% if current_date == created_at.strftime('%d/%m/%Y') %>

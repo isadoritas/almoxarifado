@@ -18,8 +18,18 @@
     color: #007bff;
   }
 
+  .list-group-item-divider {
+    border-bottom: 2px solid #ddd; /* Adiciona uma linha de divisão */
+    margin-bottom: 10px;
+  }
+
   .btn-primary {
     background-color: #007bff;
     border-color: #007bff;
     margin-bottom: 20px;
+
+  }
+
+  a {
+    text-decoration: none;
   }
