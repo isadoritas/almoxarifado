@@ -31,6 +31,9 @@
 </style>
 
 <div class="container mt-5">
+  <div class="container mt-3">
+  <%= link_to 'Voltar', produtos_path, class: 'btn btn-primary' %>
+</div>
   <h2 class="mb-4">Histórico de <%= @produto.nome %> </h2>
   <div class="list-group">
     <% @produto.show_logs.each do |log| %>
@@ -45,6 +48,4 @@
   </div>
 </div>
 
-<div class="container mt-3">
-  <%= link_to 'Voltar', produtos_path, class: 'btn btn-primary' %>
-</div>
+

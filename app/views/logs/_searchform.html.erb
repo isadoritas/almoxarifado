@@ -1,0 +1,9 @@
+<%= search_form_for @q, html: { class: 'form-inline' } do |f| %>
+  <div class="form-group mb-2">
+    <%= f.label :produto_nome_or_user_email_cont, "Pesquisar", class: 'sr-only' %>
+    <%= f.search_field :produto_nome_or_user_email_cont, class: 'form-control mr-2', placeholder: 'Pesquisar pelo nome' %>
+  </div>
+  <%= button_tag(type: 'submit', class: 'btn btn-primary mb-2') do %>
+    <i class="fas fa-search"></i>
+  <% end %>
+<% end %>

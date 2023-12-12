@@ -1,5 +1,8 @@
 class LogsController < ApplicationController
+  include Pagy::Backend
   def index
-    @logs = Log.includes(:produto, :user).all.group_by { |log| log.created_at.to_date }
+    @q = Log.includes(:produto, :user).ransack(params[:q])
+    @logs = @q.result(distinct: true)
+    @pagy, @logs = pagy(@q.result, items: 10)
   end
 end

@@ -1,28 +1,33 @@
-<%= stylesheet_link_tag 'logs' %>
 <div class="container mt-5">
-  <h2 class="mb-4">Histórico de Atualizações</h2><%= link_to 'Voltar', produtos_path, class: 'btn btn-primary' %>
-  <div class="list-group">
-    <% current_date = nil %>
-    <% @logs.sort.reverse.each do |created_at, logs| %>
-      <% if current_date != created_at.strftime('%d/%m/%Y') %>
-        <% current_date = created_at.strftime('%d/%m/%Y') %>
-        <div class="list-group-item">
-          <h3><%= current_date %></h3>
-          <div class="list-group-item-divider"></div>
-          <ul>
-      <% end %>
-      <% logs.each do |log| %>
-        <li><strong><%= log.created_at.strftime('%H:%M') %> :</strong> <%= log.user.email %> </li>
-        <% if log.tipo == 'alteracao_nome' %>
-          Realizou alteração do nome do produto de <%= log.nome_anterior %> para <%= link_to log.produto.nome, edit_produto_path(log.produto) %></strong>
-        <% elsif log.quantidade_alterada.present? %>
-          Realizou <%= log.tipo %> de <%= log.quantidade_alterada %> unidades de <%= link_to log.produto.nome, edit_produto_path(log.produto) %>
+  <h2 class="mb-4">Histórico de Atualizações</h2>
+  <%= render 'searchform' %> 
+  <table class="table">
+    <thead>
+      <tr>
+        <th><%= sort_link(@q, :created_at, "Data", default_order: :desc) %></th>
+        <th>Hora</th>
+        <th>Email do Usuário</th>
+        <th>Ação</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% @logs.each do |log| %>
+          <tr>
+            <td><%= log.created_at.strftime('%d/%m/%Y') %></td>
+            <td><%= log.created_at.strftime('%H:%M') %></td>
+            <td><%= highlight log.user.email, params.dig(:q, :produto_nome_or_user_email_cont) %></td>
+            <td>
+              <% if log.tipo == 'alteracao_nome' %>
+                Realizou alteração do nome do produto de <%= highlight log.nome_anterior, params.dig(:q, :produto_nome_or_user_email_cont) %> para <%= highlight(link_to(log.produto.nome, edit_produto_path(log.produto)), params.dig(:q, :produto_nome_or_user_email_cont), sanitize: false) %>
+              <% elsif log.quantidade_alterada.present? %>
+                Realizou <%= log.tipo %> de <%= log.quantidade_alterada %> unidades de <%= highlight(link_to(log.produto.nome, edit_produto_path(log.produto)), params.dig(:q, :produto_nome_or_user_email_cont), sanitize: false) %>
+              <% end %>
+            </td>
+          </tr>
         <% end %>
-      <% end %>
-      <% if current_date == created_at.strftime('%d/%m/%Y') %>
-          </ul>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
+    </tbody>
+  </table>
+  <%== pagy_bootstrap_nav(@pagy) %>
 </div>
+
+

@@ -57,6 +57,12 @@ class Produto < ApplicationRecord
     ["nome"]
   end
 
+
+  def self.ransackable_associations(auth_object = nil)
+    ["logs"]
+  end
+
+
   private
 
   def verify_log

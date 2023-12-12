@@ -3,7 +3,9 @@
           <%= f.label :nome_cont, "Pesquisar", class: 'sr-only' %>
           <%= f.search_field :nome_cont, class: 'form-control mr-2', placeholder: 'Pesquisar pelo nome' %>
         </div>
-        <%= f.submit 'Search', class: 'btn btn-primary mb-2' %>
+        <%= button_tag(type: 'submit', class: 'btn btn-primary mb-2') do %>
+          <i class="fas fa-search"></i>
+        <% end %>
         <%= link_to 'Novo produto', new_produto_path, class: 'btn btn-primary mb-2 ml-2' %>
       <% end %>
 
