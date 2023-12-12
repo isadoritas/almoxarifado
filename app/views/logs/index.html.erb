@@ -1,46 +1,27 @@
+<%= stylesheet_link_tag 'logs' %>
 <div class="container mt-5">
-  <h2 class="mb-4">Histórico de Atualizações</h2>
+  <h2 class="mb-4">Histórico de Atualizações</h2><%= link_to 'Voltar', produtos_path, class: 'btn btn-primary' %>
   <div class="list-group">
-    <% @logs.each do |log| %>
-      <div class="list-group-item">
+    <% current_date = nil %>
+    <% @logs.sort.reverse.each do |created_at, logs| %>
+      <% if current_date != created_at.strftime('%d/%m/%Y') %>
+        <% current_date = created_at.strftime('%d/%m/%Y') %>
+        <div class="list-group-item">
+          <h3><%= current_date %></h3>
+          <ul>
+      <% end %>
+      <% logs.each do |log| %>
+        <li><strong><%= log.created_at.strftime('%H:%M') %> :</strong> <%= log.user.email %> </li>
         <% if log.tipo == 'alteracao_nome' %>
-          <strong><%= log.user.email %>:</strong> Realizou alteração do nome do produto de <%= log.nome_anterior %> para <%= log.produto.nome %>
+          Realizou alteração do nome do produto de <%= log.nome_anterior %> para <%= log.produto.nome %></strong>
         <% elsif log.quantidade_alterada.present? %>
-          <strong><%= log.user.email %>:</strong> Realizou <%= log.tipo %> de <%= log.quantidade_alterada %> unidades de <%= log.produto.nome %> em <%= log.created_at.strftime('%m/%d/%Y') %> ás <%= log.created_at.strftime('%H:%M')%>
+          Realizou <%= log.tipo %> de <%= log.quantidade_alterada %> unidades de <%= log.produto.nome %>
         <% end %>
-      </div>
+      <% end %>
+      <% if current_date == created_at.strftime('%d/%m/%Y') %>
+          </ul>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </div>
-
-<div class="container mt-3">
-  <%= link_to 'Voltar', produtos_path, class: 'btn btn-primary' %>
-</div>
-
-<style>
-  
-.container {
-  font-family: Arial, sans-serif;
-}
-
-h2 {
-  color: #333;
-}
-
-.list-group-item {
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  margin-bottom: 10px;
-  padding: 20px;
-  background-color: #f9f9f9;
-}
-
-.list-group-item strong {
-  color: #007bff;
-}
-
-.btn-primary {
-  background-color: #007bff;
-  border-color: #007bff;
-}
-</style>

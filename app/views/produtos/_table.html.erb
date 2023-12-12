@@ -1,52 +1,51 @@
 <%= stylesheet_link_tag 'style.css' %>
 <body>
-	<section class="ftco-section">
-		<div class="container">
-			<div class="row justify-content-center">
-				<%= render 'searchform' %>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<div class="table-wrap">
-						<table class="table">
-						  <thead class="thead-primary">
-						    <tr>
-						      <th><%= sort_link(@q, :nome, "Nome", default_order: :desc) %></th>
-						      <th>Quantidade</th>
-						      <th>Actions</th>
-							  <th>Transferir</th>
-						    </tr>
-						  </thead>
-						  <tbody>
-							<% @produtos.each do |produto| %>
-							<tr>
-								<td><%= highlight produto.nome, params.dig(:q, :nome_cont) %></td>
-								<td><%= produto.quantidade %></td>
-								<td>
-									<div class="d-flex">
-									<%= link_to 'Mostrar', produto, class: 'btn btn-primary btn-sm', style: 'margin-right: 8px;' %>
-									<%= link_to 'Editar', edit_produto_path(produto), class: 'btn btn-warning btn-sm', style: 'margin-right: 8px;' %>
-									<%= link_to 'Excluír', produto, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
-									</div>
-								</td>
-								<td>
-								<td>
-									<%= form_with(model: produto, local: true, html: { class: 'container' }) do |form| %>
-									<%= form.number_field :quantidade, class: 'form-control', min: 0 %>
-									<%= form.hidden_field :user_email, value: current_user.email %>
-										<div class="form-group mt-3"> 
-											<%= form.submit "Enviar", class: 'btn btn-primary' %>
-										</div>
-									<% end %>
-								</td>
-							<tr>
-							<% end %>
-						  </tbody>
-						</table>
-					</div>
-					<%== pagy_bootstrap_nav(@pagy) %>
-				</div>
-			</div>
-		</div>
-	</section>
-	</body>
+  <section class="ftco-section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <%= render 'searchform' %>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="table-wrap">
+            <table class="table">
+              <thead class="thead-primary">
+                <tr>
+                  <th><%= sort_link(@q, :nome, "Nome", default_order: :desc) %></th>
+                  <th>Quantidade</th>
+                  <th>Actions</th>
+                  <th>Transferir</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @produtos.each do |produto| %>
+                  <tr>
+                    <td><%= highlight produto.nome, params.dig(:q, :nome_cont) %></td>
+                    <td><%= produto.quantidade %></td>
+                    <td>
+                      <div class="d-flex">
+                        <%= link_to 'Mostrar', produto, class: 'btn btn-primary btn-sm', style: 'margin-right: 8px;' %>
+                        <%= link_to 'Editar', edit_produto_path(produto), class: 'btn btn-warning btn-sm', style: 'margin-right: 8px;' %>
+                        <%= link_to 'Excluír', produto, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+                      </div>
+                    </td>
+                    <td>
+                      <%= form_with(model: produto, local: true, html: { class: 'container' }) do |form| %>
+                        <%= form.number_field :quantidade, class: 'form-control', min: 0 %>
+                        <%= form.hidden_field :user_email, value: current_user.email %>
+                        <div class="form-group mt-3">
+                          <%= form.submit "Enviar", class: 'btn btn-primary' %>
+                        </div>
+                      <% end %>
+                    </td>
+                    <tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+              <%== pagy_bootstrap_nav(@pagy) %>
+            </div>
+          </div>
+        </div>
+      </section>
+    </body>

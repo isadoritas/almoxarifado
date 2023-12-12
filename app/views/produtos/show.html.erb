@@ -1,3 +1,35 @@
+<style>
+  .container {
+    font-family: Arial, sans-serif;
+  }
+
+  h2 {
+    color: #333;
+  }
+
+  .list-group-item {
+    border: 1px solid #ddd;
+    border-radius: 10px; /* Adicionado um valor maior para arredondar as bordas */
+    margin-bottom: 10px;
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+
+  .list-group-item strong {
+    color: #007bff;
+  }
+
+  .list-group-item-divider {
+    border-bottom: 2px solid #ddd; /* Adiciona uma linha de divisão */
+    margin-bottom: 10px;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+</style>
+
 <div class="container mt-5">
   <h2 class="mb-4">Histórico de <%= @produto.nome %> </h2>
   <div class="list-group">
@@ -6,7 +38,7 @@
         <% if log.tipo == 'alteracao_nome' %>
           <strong><%= log.user.email %>:</strong> Realizou alteração do nome do produto de <%= log.nome_anterior %> para <%= log.novo_nome %>
         <% elsif log.quantidade_alterada.present? %>
-          <strong><%= log.user.email %>:</strong> Realizou <%= log.tipo %> de <%= log.quantidade_alterada %> unidades de <%= @produto.nome %> em <%= log.created_at.strftime('%d/%m/%Y') %> ás <%= log.created_at.strftime('%H:%M')%>
+          <strong><%= log.user.email %>:</strong> Realizou <%= log.tipo %> de <%= log.quantidade_alterada %> unidades de <%= @produto.nome %> em <%= log.created_at.strftime('%d/%m/%Y') %> às <%= log.created_at.strftime('%H:%M')%>
         <% end %>
       </div>
     <% end %>

@@ -4,5 +4,4 @@ class Log < ApplicationRecord
 
   attribute :nome_anterior, :string
   attribute :novo_nome, :string
-
 end
