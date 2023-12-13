@@ -1,24 +1,29 @@
-# README
+# Portal de Almoxarifado
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Este é um aplicativo web desenvolvido com Ruby on Rails, HTML e CSS para gerenciar um almoxarifado. Ele permite o controle de entrada e saída de produtos, mantém um histórico de transferências de produtos e muito mais.
 
-Things you may want to cover:
+<img src="login1.png">
 
-* Ruby version
+## Recursos
 
-* System dependencies
+1. **Controle de Entrada e Saída**: Registre a entrada e saída de produtos no almoxarifado.
+2. **Histórico de Transferências**: Acompanhe todas as transferências de produtos com um histórico detalhado.
+3. **CRUD de Produtos**: Criar, editar, mostrar e excluir
 
-* Configuration
+## Instalação
 
-* Database creation
+Certifique-se de ter Ruby, Rails e um servidor de banco de dados instalados em sua máquina. Siga estas etapas para instalar o aplicativo:
 
-* Database initialization
+1. Clone o repositório: `git clone https://github.com/seuusuario/seurepositorio.git`
+2. Navegue até o diretório do projeto: `cd almoxarifado`
+3. Instale as dependências: `bundle install`
+4. Crie o banco de dados: `rails db:create`
+5. Execute as migrações: `rails db:migrate`
+6. Inicie o servidor: `rails server`
 
-* How to run the test suite
+Agora você pode acessar o aplicativo em `localhost:3000` no seu navegador.
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+## Licença
 
-* ...
+Este projeto está licenciado sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
