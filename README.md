@@ -2,7 +2,7 @@
 
 Este é um aplicativo web desenvolvido com Ruby on Rails, HTML e CSS para gerenciar um almoxarifado. Ele permite o controle de entrada e saída de produtos, mantém um histórico de transferências de produtos e muito mais.
 
-<img src="login1.png">
+<img src="app/assets/images/login1.png">
 
 ## Recursos
 
