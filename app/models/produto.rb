@@ -25,9 +25,6 @@ class Produto < ApplicationRecord
     end
   end
 
-  def unchanged?(params)
-    self.nome == params[:nome] && self.quantidade == params[:quantidade]
-  end
   
   def log_quantidade(user, quantidade_anterior)
     quantidade_alterada = self.quantidade - quantidade_anterior
