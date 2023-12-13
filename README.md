@@ -14,7 +14,7 @@ Este é um aplicativo web desenvolvido com Ruby on Rails, HTML e CSS para gerenc
 
 Certifique-se de ter Ruby, Rails e um servidor de banco de dados instalados em sua máquina. Siga estas etapas para instalar o aplicativo:
 
-1. Clone o repositório: `git clone https://github.com/seuusuario/seurepositorio.git`
+1. Clone o repositório: `git clone https://github.com/isadoritas/almoxarifado.git`
 2. Navegue até o diretório do projeto: `cd almoxarifado`
 3. Instale as dependências: `bundle install`
 4. Crie o banco de dados: `rails db:create`
