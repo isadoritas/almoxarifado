@@ -1,4 +1,4 @@
-<% if @produto.errors.any? %>
+<% if defined?(@produto) && @produto && @produto.errors.any? %>
   <div class="alert <%= flash_class('error') %> alert-dismissible fade show text-center" role="alert">
     <% @produto.errors.full_messages.each do |message| %>
       <div>
